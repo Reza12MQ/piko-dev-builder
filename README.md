@@ -3,7 +3,7 @@ Daily auto-build if there is a new update of Piko pre-release patches or X (Twit
 ### Color variants
 - **Twitter-Piko**: Default Twitter Blue
 - **Twitter-Piko-Material-You**: User's Material You palette (Android 12+ dynamic color)
-### Get the [latest CI release](https://github.com/Reza12MQ/piko-builder/releases)
+### Get the [latest CI release](https://github.com/Reza12MQ/piko-dev-builder/releases)
 ### Credits
 - Based on [j-hc ReVanced Magisk Module](https://github.com/j-hc/revanced-magisk-module)
 - [Piko](https://github.com/crimera/piko)

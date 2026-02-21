@@ -1,5 +1,5 @@
 # Twitter Piko Pre-Release Builder
-Daily auto-build if there is a new update of Piko pre-release patches or X (Twitter) stable version.
+Daily auto-build if there is a new update of Piko pre-release patches or X (Twitter) app stable version.
 ### Color variants
 - **Twitter-Piko**: Default Twitter Blue
 - **Twitter-Piko-Material-You**: User's Material You palette (Android 12+ dynamic color)

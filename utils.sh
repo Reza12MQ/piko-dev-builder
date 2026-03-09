@@ -459,8 +459,15 @@ get_uptodown_pkg_name() { $HTMLQ --text "tr.full:nth-child(1) > td:nth-child(3)"
 dl_archive() {
 	local url=$1 version=$2 output=$3 arch=$4
 	local path version=${version// /}
+	local is_bundle=false
 	path=$(grep "${version_f#v}-${arch// /}" <<<"$__ARCHIVE_RESP__") || return 1
-	req "${url}/${path}" "$output"
+	if [ "$__ARCHIVE_PKG_NAME__" == "*.apkm" ]; then is_bundle=true; else is_bundle=false; fi
+	if [ $is_bundle = true ]; then
+		req "${url}/${path}" "$output.apkm" || return 1
+		merge_splits "${output}.apkm" "${output}"
+	else
+		req "${url}/${path}" "$output"
+	fi
 }
 get_archive_resp() {
 	local r
@@ -468,7 +475,7 @@ get_archive_resp() {
 	if [ -z "$r" ]; then return 1; else __ARCHIVE_RESP__=$(sed -n 's;^<a href="\(.*\)"[^"]*;\1;p' <<<"$r"); fi
 	__ARCHIVE_PKG_NAME__=$(awk -F/ '{print $NF}' <<<"$1")
 }
-get_archive_vers() { sed 's/^[^-]*-//;s/-\(all\|arm64-v8a\|arm-v7a\)\.apk//g' <<<"$__ARCHIVE_RESP__"; }
+get_archive_vers() { sed 's/^[^-]*-//;s/-\(all\|arm64-v8a\|arm-v7a\)\.apk[m]*//g' <<<"$__ARCHIVE_RESP__"; }
 get_archive_pkg_name() { echo "$__ARCHIVE_PKG_NAME__"; }
 
 # -------------------- direct --------------------
